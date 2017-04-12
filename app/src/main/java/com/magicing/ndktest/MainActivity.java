@@ -81,11 +81,8 @@ public class MainActivity extends Activity{
     float up_x = 0;
     long up_time = 0;
     private int curRate = 80;
+    private NDKMethod ndk;
 
-    static {
-        System.loadLibrary("jpegbither");//导入生成的链接库文件
-        System.loadLibrary("imagetool");//导入生成的链接库文件
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +92,7 @@ public class MainActivity extends Activity{
     }
 
     private void init(){
+        ndk = new NDKMethod();
         surfaceView = (SurfaceView)findViewById(R.id.surfaceView);
         svHolder = surfaceView.getHolder();
         svHolder.addCallback(new SurfaceHolder.Callback() {
@@ -122,7 +120,7 @@ public class MainActivity extends Activity{
         initData();
     }
 
-    public native void showJPG(Surface surface, String img);
+
 
     private void initData(){
         new Thread(){
@@ -254,22 +252,14 @@ public class MainActivity extends Activity{
 //
 //
 //        }
-        showJPG(mSurface, fileLists.get(curFrame));
+        ndk.showJPG(mSurface, fileLists.get(curFrame));
     }
 
     private void turnLeft(){
         if(curFrame > fileLists.size() - 1){
             curFrame = curFrame % fileLists.size();
         }
-//        if(mMemoryCache!= null && mMemoryCache.get(curFrame) != null){
-//            img.setImageBitmap(mMemoryCache.get(curFrame));
-//        }else if(curFrame < fileLists.size()){
-//            Bitmap bitmap = BitmapUtils.getBitmapFromFilePath(fileLists.get(curFrame), Utils.getDisplayWidth(this) / 2,
-//                    Utils.getDisplayWHHeigth(this) / 2);
-//            if(bitmap != null)
-//                img.setImageBitmap(bitmap);
-//        }
-        showJPG(mSurface, fileLists.get(curFrame));
+        ndk.showJPG(mSurface, fileLists.get(curFrame));
     }
 
     /**
@@ -349,7 +339,7 @@ public class MainActivity extends Activity{
             switch (msg.what){
                 case CONVERT_FRAME:
 //                    Log.i("ACTION","curFrame="+curFrame);
-                    showJPG(mSurface, fileLists.get(curFrame));
+                    ndk.showJPG(mSurface, fileLists.get(curFrame));
 
                     break;
                 case  INITIAL_FINISH:

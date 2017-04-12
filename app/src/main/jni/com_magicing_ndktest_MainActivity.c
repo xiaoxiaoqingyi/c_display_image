@@ -32,7 +32,7 @@
  * Method:    showJPG
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_com_magicing_ndktest_MainActivity_showJPG
+JNIEXPORT void JNICALL Java_com_magicing_ndktest_utils_NDKMethod_showJPG
   (JNIEnv *env, jobject obj, jobject surface, jstring img){
     const char * imgChar;
        jboolean * isCopy;

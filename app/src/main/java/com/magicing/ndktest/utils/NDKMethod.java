@@ -1,14 +1,15 @@
 package com.magicing.ndktest.utils;
 
+import android.view.Surface;
+
 /**
  * Created by Administrator on 2016/8/9.
  */
-public class NDKMethod {
+public class NDKMethod{
 
-//    static {
-//        System.loadLibrary("NDKTest");//导入生成的链接库文件
-//    }
-//
-//    public native String getStringFromNative();//本地方法
-//    public native String getString_From_c();
+    static {
+        System.loadLibrary("imagetool");//导入生成的链接库文件
+    }
+
+    public native void showJPG(Surface surface, String img);
 }
