@@ -12,4 +12,6 @@ public class NDKMethod{
     }
 
     public native void showJPG(Surface surface, String img);
+
+    public native void showImage(Surface surface, String path);
 }
