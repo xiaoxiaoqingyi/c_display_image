@@ -1,29 +1,16 @@
 package com.magicing.ndktest;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.LruCache;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.magicing.ndktest.utils.BitmapUtils;
 import com.magicing.ndktest.utils.NDKMethod;
 
 import java.io.File;
@@ -39,7 +26,6 @@ public class HugeActivity extends AppCompatActivity
     private SurfaceView surfaceView;
     private Surface mSurface;
     private SurfaceHolder svHolder;
-    private String path = "/storage/emulated/0/DCIM/ring_pd1.jpg";
     public final static int CONVERT_FRAME = 111;
     private final static int BASE_RACE = 80;
     private final static int FASTEST_RACE = 20;
@@ -47,7 +33,6 @@ public class HugeActivity extends AppCompatActivity
     private final static int INITIAL_FINISH = 55555;
 
     private String dirName = "64668954";
-    private boolean isEdited = false;
     //    private List<String> fileLists = new ArrayList<String>();
     private HashMap<Integer, String> fileLists = new HashMap<Integer, String>();
     private File[] fileArray;
@@ -89,7 +74,7 @@ public class HugeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_huge);
         init();
     }
 
@@ -102,9 +87,6 @@ public class HugeActivity extends AppCompatActivity
             public void surfaceCreated(SurfaceHolder holder) {
                 Log.i(TAG, "surfaceCreated=");
                 mSurface = holder.getSurface();
-//                Log.i(TAG, "start="+System.currentTimeMillis());
-//                showJPG(holder.getSurface(), path);
-//                Log.i(TAG, "end="+System.currentTimeMillis());
             }
 
             @Override
@@ -244,16 +226,6 @@ public class HugeActivity extends AppCompatActivity
             curFrame = curFrame % fileLists.size() + fileLists.size();
         }
 
-//        if(mMemoryCache!= null && mMemoryCache.get(curFrame) != null){
-//            img.setImageBitmap(mMemoryCache.get(curFrame));
-//        }else if(curFrame < fileLists.size()){
-//            Bitmap bitmap = BitmapUtils.getBitmapFromFilePath(fileLists.get(curFrame), Utils.getDisplayWidth(this) / 2,
-//                    Utils.getDisplayWHHeigth(this) / 2);
-//            if(bitmap != null)
-//                img.setImageBitmap(bitmap);
-//
-//
-//        }
         ndk.showJPG(mSurface, fileLists.get(curFrame));
     }
 
