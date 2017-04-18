@@ -10,7 +10,7 @@ import android.view.SurfaceView;
 
 import com.magicing.ndktest.utils.NDKMethod;
 
-public class SingleActivity extends Activity {
+public class SingleActivity extends AppCompatActivity {
 
     private static final String TAG = "SingleActivity";
     private NDKMethod ndk;

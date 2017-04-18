@@ -182,3 +182,21 @@ int read_jpeg_file_show(const char *input_filename, ANativeWindow_Buffer *nwBuff
 
     return 0;
 }
+
+
+JNIEXPORT void JNICALL Java_com_magicing_ndktest_utils_NDKMethod_showImage
+        (JNIEnv *env, jobject obj, jobject surface, jstring path){
+    const char * imgChar;
+    jboolean * isCopy;
+    
+    imgChar =(*env)->GetStringUTFChars(env, path, 0);
+    ANativeWindow_Buffer nwBuffer;
+
+    LOGI("img path : %s  ",imgChar);
+
+    LOGI("ANativeWindow_fromSurface ");
+    ANativeWindow * mANativeWindow = ANativeWindow_fromSurface(env, surface);
+
+
+    return;
+}
