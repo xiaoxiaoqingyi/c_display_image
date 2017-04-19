@@ -116,13 +116,6 @@ int read_jpeg_file_show(const char *input_filename, ANativeWindow_Buffer *nwBuff
     buffer = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE,
             row_width, 1);
 
-    //一行
-    //buffertmp = (unsigned char *) malloc(row_width);
-    //memset(buffertmp, 0, row_width);
-
-    LOGI("malloc and memset");
-//        tmp = output_buffer;
-
     /* Process data */
     int get8h5 = 248, get8h6 = 252;
     __uint16_t * line = (__uint16_t *) nwBuffer->bits;
@@ -166,9 +159,6 @@ int read_jpeg_file_show(const char *input_filename, ANativeWindow_Buffer *nwBuff
         }
     }
 
-//                memcpy(tmp, *buffer, row_width);
-//                tmp += row_width;
-
     (void) jpeg_finish_decompress(&cinfo);
     LOGI("jpeg_finish_decompress !!");
 
@@ -177,8 +167,6 @@ int read_jpeg_file_show(const char *input_filename, ANativeWindow_Buffer *nwBuff
 
     /* Close files, if we opened them */
     fclose(input_file);
-
-    //free(buffertmp);
 
     return 0;
 }
